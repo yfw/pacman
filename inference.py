@@ -18,20 +18,6 @@ class InferenceModule():
       uniformBeliefs.normalize()
       self.distributions[enemyIndex] = uniformBeliefs
 
-  # used if we know exactly where the agent is
-  def useExactDistribution(self, gameState, agentIndex, agentPosition):
-    exactDistribution = Counter()
-    for x in xrange(gameState.data.layout.width):
-      for y in xrange(gameState.data.layout.height):
-        if not gameState.hasWall(x, y):
-          position = (x, y)
-          if (position == agentPosition):
-            exactDistribution[position] = 1.0
-          else:
-            exactDistribution[position] = 0.0
-    exactDistribution.normalize()
-    self.distributions[agentIndex] = exactDistribution
-
   def observe(self, gameState, selfIndex, agentIndex):
     noisyAgentDistance = gameState.getAgentDistances()[agentIndex]
     
